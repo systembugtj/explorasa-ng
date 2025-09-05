@@ -16,7 +16,6 @@
     "deb64-install": "sudo apt install ./build/installers/elfile_1.0.0_amd64.deb",
     "live": "npm run build && electron . --ignore-gpu-blacklist",
     "package": "npm run build && rimraf build && electron-packager ./ --out=build",
-    "postinstall": "npm rebuild sass && ./node_modules/.bin/electron-rebuild",
     "serve": "ng serve",
     "test": "npm run build-main && DEV_MODE=1 electron . --ignore-gpu-blacklist",
     "toc": "markdown-toc -i README.md"
@@ -69,6 +68,9 @@
     "@angular/cli": "8",
     "@angular/compiler-cli": "8",
     "@angular/language-service": "8",
+    "@nrwl/cli": "8.9.0",
+    "@nrwl/tao": "8.9.0",
+    "@nrwl/workspace": "8.9.0",
     "@types/mkdirp": "^0.5.2",
     "@types/node": "12",
     "@types/node-dir": "0.0.33",
@@ -77,17 +79,19 @@
     "@types/touch": "3",
     "@types/trash": "5",
     "codelyzer": "^5.0.1",
-    "devtron": "1",
-    "electron": "5",
+
+    "electron": "^11.5.0",
     "electron-devtools-installer": "2",
     "electron-installer-debian": "2",
     "electron-packager": "14",
-    "electron-rebuild": "1",
     "eslint": "6",
     "markdown-toc": "1",
     "rimraf": "2",
     "ts-node": "8",
     "tslint": "5",
     "typescript": "3.4.5"
+  },
+  "volta": {
+    "node": "12.0.0"
   }
 }

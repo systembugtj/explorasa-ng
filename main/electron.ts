@@ -18,23 +18,24 @@ app.on('ready', () => {
     resizable: true,
     webPreferences: {
       nodeIntegration: true,
-      scrollBounce: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
       webSecurity: !isDev
     }  
   });
   if (isDev) {
-    require('devtron').install();
-    const { default: installExtension } = require('electron-devtools-installer');
-    // https://chrome.google.com/webstore/detail/redux-devtools/
-    //   lmhkpmbekcpmknklioeibfkpmmfibljd
-    installExtension('lmhkpmbekcpmknklioeibfkpmmfibljd')
-      .then((name) => console.log(`Added Extension:  ${name}`))
-      .catch((err) => console.log('An error occurred: ', err));
-    // https://chrome.google.com/webstore/detail/local-storage-explorer/
-    //   hglfomidogadbhelcfomenpieffpfaeb?hl=en
-    installExtension('hglfomidogadbhelcfomenpieffpfaeb')
-      .then((name) => console.log(`Added Extension:  ${name}`))
-      .catch((err) => console.log('An error occurred: ', err));
+    // Use built-in Chrome DevTools instead of Devtron for better compatibility
+    console.log('Development mode enabled - DevTools will be available');
+    
+    // Optional: Install Redux DevTools extension if available
+    try {
+      const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+      installExtension(REDUX_DEVTOOLS)
+        .then((name) => console.log(`Added Extension: ${name}`))
+        .catch((err) => console.log('Redux DevTools not available:', err.message));
+    } catch (err) {
+      console.log('DevTools installer not available, using built-in tools');
+    }
     theWindow.loadURL(url.format({
       hostname: 'localhost',
       pathname: path.join(),

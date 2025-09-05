@@ -154,9 +154,10 @@ export class RootCtrlComponent extends LifecycleComponent {
           win.setBounds(window.bounds);
       });
     // record the bounds when they change
-    this.electron.ipcRenderer.on('bounds', debounce((event, bounds) => {
+    const boundsHandler = (event: any, bounds: any) => {
       this.store.dispatch(new SetBounds(bounds));
-    }, config.setBoundsThrottle));
+    };
+    this.electron.ipcRenderer.on('bounds', debounce(boundsHandler, config.setBoundsThrottle) as any);
   }
 
 }
